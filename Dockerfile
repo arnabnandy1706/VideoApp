@@ -2,6 +2,7 @@ FROM centos:latest
 LABEL maintainer "Arnab Kumar Nandy <arnab.nandy1991@gmail.com>"
 RUN yum install epel-release -y
 RUN yum install gcc openssl-devel bzip2-devel wget curl make sqlite3-devel sqlite-devel -y
+RUN yum install mariadb-devel mysql-python -y
 WORKDIR /tmp/
 RUN wget https://www.python.org/ftp/python/3.6.6/Python-3.6.6.tgz
 RUN tar xzf Python-3.6.6.tgz
@@ -9,6 +10,8 @@ WORKDIR /tmp/Python-3.6.6
 RUN ./configure
 RUN make
 RUN make install
+RUN pip3 install pymysql
+RUN pip3 install mysqlclient
 RUN pip3 install django
 RUN mkdir /opt/django
 WORKDIR /opt/django
